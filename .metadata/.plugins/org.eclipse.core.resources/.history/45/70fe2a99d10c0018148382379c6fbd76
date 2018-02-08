@@ -1,0 +1,103 @@
+package test;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.BitSet;
+import java.util.HashSet;
+import java.util.Set;
+
+import All.AttributeInfo;
+
+public class DecisionTree {
+	private int classesCount;
+	/**
+	 * Used to determine if current attribute already used or not
+	 */
+	private BitSet columns;
+	/**
+	 * Classes set of the training data
+	 */
+	private Set<String> classes;
+	private int rowsCount;
+	private int columnsCount;
+	private Node rootNode;
+	private File psvFile;
+	
+	
+	public DecisionTree() {
+		this.columns = new BitSet(columnsCount);
+		classes = new HashSet<String>();
+		rootNode = new Node();
+	}
+
+
+	public void train(File file) {
+		this.psvFile = file;
+		try {
+			findClasses(psvFile);
+			BitSet rows = new BitSet(rowsCount);
+			for (int i = 0; i < rowsCount; i++) {
+				rows.set(i);
+			}
+			buildTree(rootNode, rows);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
+
+	private void buildTree(Node rootNode, BitSet rows) {
+		AttributeInfo bestAttribute = findBestSplit(psvFile, rows);
+		
+		/*
+		if (bestAttribute == null) {
+			currentNode.setLeaf(true);
+		}
+		*/
+		
+	}
+
+
+	private test.AttributeInfo findBestSplit(File psvFile, BitSet rows) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	private void findClasses(File csvFile) throws IOException {
+		FileReader fileReader = new FileReader(csvFile);
+		BufferedReader breader = new BufferedReader(fileReader);
+		int counter = 0;
+		int classCounter = 0;
+		String line;
+		while ((line = breader.readLine()) != null) {
+			if (counter != 0) {
+				String[] cols = line.split("\\|");
+				columnsCount = cols.length;
+				if (cols.length > 2) {
+					String targetValue = cols[cols.length - 1];
+					if (!classes.contains(targetValue)) {
+						classes.add(cols[cols.length - 1]);
+						classCounter++;
+					}
+				}
+			}
+			counter++;
+		}
+		rowsCount = counter;
+		classesCount = classCounter;
+		breader.close();
+		fileReader.close();
+		
+	}
+	
+	
+
+}

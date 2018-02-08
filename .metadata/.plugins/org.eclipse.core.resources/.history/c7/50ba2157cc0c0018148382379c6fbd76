@@ -1,0 +1,30 @@
+package test;
+
+import java.io.File;
+import java.util.BitSet;
+import java.util.Set;
+
+
+public class DecisionTree {
+	private int classesCount;
+	/**
+	 * Used to determine if current attribute already used or not
+	 */
+	private BitSet columns;
+	/**
+	 * Classes set of the training data
+	 */
+	private Set<String> classes;
+	private int rowsCount;
+	private int columnsCount;
+	private Node rootNode;
+	private File psvFile;
+	
+	
+	public DecisionTree() {
+		
+	}
+	
+	
+
+}

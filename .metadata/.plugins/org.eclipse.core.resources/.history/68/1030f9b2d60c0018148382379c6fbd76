@@ -1,0 +1,11 @@
+package test;
+
+import java.io.File;
+
+public class DecisionTree {
+	
+	public void test(String filePath){
+		File file = new File(filePath);
+		
+	}
+}
