@@ -8,14 +8,14 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 		
-		DecisionTree tree = new DecisionTree(); 
-		
+		DecisionTree tree = new DecisionTree("data.txt");
+		/*
 		try {
 			tree.test("data.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 

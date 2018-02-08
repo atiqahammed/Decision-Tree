@@ -6,8 +6,61 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import javax.xml.soap.Node;
 
 public class DecisionTree {
+	private ArrayList<String> allData;
+	private ArrayList<Column> allColumn;
+	private Node root = null;
+	
+	public DecisionTree(String filePath) {
+		try {
+			inputData(filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		builtColumn();
+	}
+	
+	public void builtTree(){
+		
+	}
+	
+	
+	private void builtColumn() {
+		String []arr = allData.get(0).split(",");
+		int numberOfColumn = arr.length;
+		
+		String [][] multD = new String[allData.size()][];
+		for(int i = 0; i < allData.size(); i++)
+			multD[i] = allData.get(i).split(",");
+		allColumn = new ArrayList<>();
+		
+		for(int i = 0; i < numberOfColumn; i++)
+		{
+			ArrayList<String> valuesOfColumn = new ArrayList<>();
+			for(int j=1; j < allData.size(); j++)
+				if(!valuesOfColumn.contains(multD[j][i]))
+					valuesOfColumn.add(multD[j][i]);
+			Column column = new Column(multD[0][i], valuesOfColumn);	
+			allColumn.add(column);
+		}	
+	}
+
+
+	private void inputData(String filePath) throws IOException{
+		File file = new File(filePath);
+		FileReader fileReader = new FileReader(file);
+		BufferedReader breader = new BufferedReader(fileReader);
+		allData = new ArrayList<>();
+		String line;
+		while ((line = breader.readLine()) != null) 
+			allData.add(line);
+		breader.close();
+		fileReader.close();
+	}
 	
 	public void test(String filePath) throws IOException{
 		File file = new File(filePath);
@@ -15,7 +68,7 @@ public class DecisionTree {
 		BufferedReader breader = new BufferedReader(fileReader);
 		
 		int counter = 0;
-		ArrayList<String> allData = new ArrayList<>();
+		allData = new ArrayList<>();
 		
 		String line;
 		while ((line = breader.readLine()) != null) {

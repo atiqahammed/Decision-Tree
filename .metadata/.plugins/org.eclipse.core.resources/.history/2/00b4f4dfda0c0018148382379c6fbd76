@@ -1,0 +1,53 @@
+package test;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class DecisionTree {
+	private ArrayList<String> allData;
+	private ArrayList<Column> allColumn;
+	
+	public DecisionTree(String filePath) {
+		try {
+			inputData(filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private void inputData(String filePath) throws IOException{
+		File file = new File(filePath);
+		FileReader fileReader = new FileReader(file);
+		BufferedReader breader = new BufferedReader(fileReader);
+		allData = new ArrayList<>();
+		String line;
+		while ((line = breader.readLine()) != null) 
+			allData.add(line);
+		breader.close();
+		fileReader.close();
+	}
+	
+	public void test(String filePath) throws IOException{
+		File file = new File(filePath);
+		FileReader fileReader = new FileReader(file);
+		BufferedReader breader = new BufferedReader(fileReader);
+		
+		int counter = 0;
+		allData = new ArrayList<>();
+		
+		String line;
+		while ((line = breader.readLine()) != null) {
+			allData.add(line);
+			//counter++;
+		}
+		
+		System.out.println(allData.size());
+		
+		
+	}
+}

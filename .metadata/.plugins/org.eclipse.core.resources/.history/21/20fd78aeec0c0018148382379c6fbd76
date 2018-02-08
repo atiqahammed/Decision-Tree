@@ -1,0 +1,19 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Column {
+	private String name;
+	private HashSet<String> values;
+	
+	
+	public Column(String name, HashSet<String> values) {
+		this.name = name;
+		this.values = values;
+	}
+	
+	
+	
+	
+}

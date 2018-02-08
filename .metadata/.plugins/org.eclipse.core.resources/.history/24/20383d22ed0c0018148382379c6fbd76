@@ -1,0 +1,111 @@
+package test;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class DecisionTree {
+	private ArrayList<String> allData;
+	private ArrayList<Column> allColumn;
+	
+	public DecisionTree(String filePath) {
+		try {
+			inputData(filePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		builtColumn();
+	}
+	
+	
+	private void builtColumn() {
+		String []arr = allData.get(0).split(",");
+		int numberOfColumn = arr.length;
+		
+		String [][] multD = new String[allData.size()][];
+		for(int i = 0; i < allData.size(); i++)
+			multD[i] = allData.get(i).split(",");
+		
+		
+		for(int i = 0; i < numberOfColumn; i++)
+		{
+			ArrayList<String> valuesOfColumn = new ArrayList<>();
+			for(int j=1; j < allData.size(); j++){
+				if(!valuesOfColumn.contains(multD[j][i]))
+					valuesOfColumn.add(multD[j][i]);
+				////System.out.print(j+","+i+" ");
+				//System.out.print(multD[j][i]+" ");
+			}
+			Column column = new Column(multD[0][i], valuesOfColumn);
+			System.out.println(valuesOfColumn.size());
+		}
+		
+		//System.out.println(multD[14][4]);
+		
+		
+		/*for(int i = 0; i < numberOfColumn; i++)
+		{
+			HashSet<String> valuesOfColumn = new HashSet<>();
+			for(int j = 1; j<allData.size(); j++)
+			{
+				System.out.println(multD[j][i]);
+				//valuesOfColumn.add(multD[i][j]);
+			}
+			
+			Column column = new Column(multD[i][0], valuesOfColumn);
+			allColumn.add(column);
+		}*/
+		
+		//System.out.println(allColumn.size());
+		
+		System.out.println();
+		
+		/*
+		for(int i = 0; i < 15; i++)
+		{
+			for(int j = 0; j < 5; j++)
+				System.out.print(multD[i][j]+" ");
+			System.out.println();
+		}*/
+		
+		
+		
+	}
+
+
+	private void inputData(String filePath) throws IOException{
+		File file = new File(filePath);
+		FileReader fileReader = new FileReader(file);
+		BufferedReader breader = new BufferedReader(fileReader);
+		allData = new ArrayList<>();
+		String line;
+		while ((line = breader.readLine()) != null) 
+			allData.add(line);
+		breader.close();
+		fileReader.close();
+	}
+	
+	public void test(String filePath) throws IOException{
+		File file = new File(filePath);
+		FileReader fileReader = new FileReader(file);
+		BufferedReader breader = new BufferedReader(fileReader);
+		
+		int counter = 0;
+		allData = new ArrayList<>();
+		
+		String line;
+		while ((line = breader.readLine()) != null) {
+			allData.add(line);
+			//counter++;
+		}
+		
+		System.out.println(allData.size());
+		
+		
+	}
+}
