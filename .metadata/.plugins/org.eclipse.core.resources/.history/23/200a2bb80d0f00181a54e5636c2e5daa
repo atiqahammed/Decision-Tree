@@ -1,0 +1,14 @@
+package Test;
+
+import java.io.File;
+
+public class DecisionTree {
+	private File file;
+	
+	
+	public void constructTree() {
+		file = new File("data.txt");
+		
+	}
+
+}
