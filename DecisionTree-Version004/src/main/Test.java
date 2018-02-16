@@ -6,6 +6,11 @@ public class Test {
 	public static void main(String[] args) {
 		//System.out.println("Hello world");
 		DecisionTree decisionTree = new DecisionTree("data.txt");
+		decisionTree.inputData();
+		//String s = "\"yes\"";
+		//System.out.println(s);
 
 	}
+
+
 }

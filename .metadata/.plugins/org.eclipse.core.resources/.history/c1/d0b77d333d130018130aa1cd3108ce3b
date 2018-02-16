@@ -1,0 +1,31 @@
+package tree;
+
+import java.io.File;
+
+public class DecisionTree {
+	private File dataFile;
+
+	public DecisionTree(String filePath) {
+		dataFile = new File(filePath);
+	}
+
+	public void inputData() {
+		initializeDataStructure();
+		String s = null;
+		try {
+			while ((s = bufferedReader.readLine()) != null) {
+				String data[] = s.split(",");
+				listMap.get(data[data.length - 1]).add(new Data(data));
+			}
+			totalHam = (hamCollection.size()/10)*9;
+			totalSpam = (spamCollection.size()/10)*9;
+
+		} catch (IOException e) {
+			System.out.println("got error in reading data using bufferReader");
+		}
+	}
+
+
+
+
+}
