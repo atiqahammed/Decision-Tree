@@ -105,8 +105,12 @@ public class DecisionTree {
 
 
 		// write
-		for(int i = 0; i < attributeName.getColumnSize() - 1; i++)
-			printWriter.print(attributeName.getValueInIndex(i)+"|");
+
+		writeData(attributeName);
+		for(int i = 0; i < trainingData.size(); i++)
+			writeData(trainingData.get(i));
+
+		System.out.println("completed");
 		//
 		printWriter.close();
 		try {
@@ -115,6 +119,13 @@ public class DecisionTree {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void writeData(Data myData) {
+		for(int i = 0; i < myData.getColumnSize() - 1; i++)
+			printWriter.print(myData.getValueInIndex(i)+"|");
+		printWriter.println(myData.getValueInIndex(myData.getColumnSize()-1));
+
 	}
 
 	/*
