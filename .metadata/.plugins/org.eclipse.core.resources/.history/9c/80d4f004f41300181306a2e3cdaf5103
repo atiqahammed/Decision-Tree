@@ -81,10 +81,6 @@ public class DecisionTree {
 		//builtTree(trainingData.size(), trainingData.get(0).getColumnSize(), trainingData, root, attributeName);
 
 		//System.out.println(root.index);
-
-
-
-
 	}
 
 
