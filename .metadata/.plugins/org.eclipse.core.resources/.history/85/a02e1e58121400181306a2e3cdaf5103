@@ -124,6 +124,7 @@ public class TreeBuilder {
 	}
 
 	private void testWithData() {
+
 		for (int i = 0; i < testingData.size(); i++) {
 			String arrTemp[] = convertArray(testingData.get(i));
 			String previousAns = testingData.get(i).getValueInIndex(testingData.get(i).getColumnSize() - 1);
@@ -137,6 +138,7 @@ public class TreeBuilder {
 			if (previousAns.equals("nowin") && predectedAns.equals("won"))
 				FP++;
 		}
+
 	}
 
 	private String[] convertArray(Data tempData) {
@@ -144,6 +146,7 @@ public class TreeBuilder {
 		for (int i = 0; i < tempData.getColumnSize() - 1; i++)
 			arrTemp[i] = tempData.getValueInIndex(i);
 		return arrTemp;
+
 	}
 
 	private void writeDataIntoTempFile() {
@@ -151,9 +154,11 @@ public class TreeBuilder {
 		try {
 			fileWriter = new FileWriter(tempFile);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		printWriter = new PrintWriter(fileWriter);
+		// write
 		writeData(new Data(arr));
 		for (int i = 0; i < trainingData.size(); i++)
 			writeData(trainingData.get(i));
@@ -174,6 +179,14 @@ public class TreeBuilder {
 		printWriter.println(myData.getValueInIndex(myData.getColumnSize() - 1));
 
 	}
+
+	/*
+	 * private void builtTree(int row, int columnSize, ArrayList<Data>
+	 * trainingData, Node currentNode, Data attributeName) { currentNode = new
+	 * Node(); currentNode.setIndex(6); System.out.println(currentNode.index);
+	 *
+	 * }
+	 */
 
 	private void selectRandomTrainData(ArrayList<Integer> allTested, ArrayList<Data> dataList) {
 		ArrayList<Integer> temp = new ArrayList<>();
