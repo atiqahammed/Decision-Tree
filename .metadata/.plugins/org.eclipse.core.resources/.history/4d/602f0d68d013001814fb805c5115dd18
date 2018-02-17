@@ -7,7 +7,6 @@ public class Test {
 		//System.out.println("Hello world");
 		DecisionTree decisionTree = new DecisionTree("data.txt");
 		decisionTree.inputData();
-		decisionTree.process();
 		//String s = "\"yes\"";
 		//System.out.println(s);
 

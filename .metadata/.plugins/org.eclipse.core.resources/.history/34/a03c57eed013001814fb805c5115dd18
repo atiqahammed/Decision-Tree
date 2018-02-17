@@ -22,8 +22,6 @@ public class DecisionTree {
 	private Data attributeName;
 	private ArrayList<Integer> allTestedYes;
 	private ArrayList<Integer> allTestedNo;
-	private ArrayList<Data> trainingData;
-	private ArrayList<Data> testingData;
 	
 	public DecisionTree(String filePath) {
 		dataFile = new File(filePath);
@@ -66,11 +64,5 @@ public class DecisionTree {
 		allTestedYes = new ArrayList<>();
 		allTestedNo = new ArrayList<>();
 		crossValidation();
-	}
-
-	private void crossValidation() {
-		trainingData = new ArrayList<>();
-		testingData = new ArrayList<>();
-		
 	}
 }

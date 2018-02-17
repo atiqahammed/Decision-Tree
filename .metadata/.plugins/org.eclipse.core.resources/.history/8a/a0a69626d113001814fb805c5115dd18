@@ -70,7 +70,7 @@ public class DecisionTree {
 
 	private void crossValidation() {
 		trainingData = new ArrayList<>();
-		testingData = new ArrayList<>();
+		testingData = new ArrayList<>()
 		
 	}
 }

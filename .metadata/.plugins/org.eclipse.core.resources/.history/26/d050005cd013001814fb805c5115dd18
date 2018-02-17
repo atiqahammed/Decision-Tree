@@ -20,11 +20,7 @@ public class DecisionTree {
 	private ArrayList<Data> yesCollection;
 	private ArrayList<Data> noCollection;
 	private Data attributeName;
-	private ArrayList<Integer> allTestedYes;
-	private ArrayList<Integer> allTestedNo;
-	private ArrayList<Data> trainingData;
-	private ArrayList<Data> testingData;
-	
+
 	public DecisionTree(String filePath) {
 		dataFile = new File(filePath);
 	}
@@ -45,6 +41,12 @@ public class DecisionTree {
 			}
 			totalYes = (yesCollection.size()/10)*9;
 			totalNo = (noCollection.size()/10)*9;
+			
+			/*System.out.println(yesCollection.size());
+			System.out.println(noCollection.size());
+			
+			System.out.println(totalYes);
+			System.out.println(totalNo);*/
 		
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
@@ -60,17 +62,5 @@ public class DecisionTree {
 			System.out.println("file not Found");
 		}
 		bufferedReader = new BufferedReader(fileReader);
-	}
-
-	public void process() {
-		allTestedYes = new ArrayList<>();
-		allTestedNo = new ArrayList<>();
-		crossValidation();
-	}
-
-	private void crossValidation() {
-		trainingData = new ArrayList<>();
-		testingData = new ArrayList<>();
-		
 	}
 }
