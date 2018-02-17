@@ -16,7 +16,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * 
+ *
  * @author mostafa The main class to apply train and classification test It's
  *         Contains the main Logic for decision tree learning and test
  */
@@ -56,7 +56,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param attrs
 	 * @param node
 	 * @return
@@ -80,7 +80,7 @@ public class DecisionTree {
 
 	/**
 	 * Train the tree from the psv File
-	 * 
+	 *
 	 * @param psvFile
 	 */
 	public void train(File psvFile) {
@@ -98,13 +98,13 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currentNode
 	 * @param rows
 	 * @throws IOException
-	 * 
+	 *
 	 * Building the tree based on decision tree algorithm
-	 * 1-Finding Best Attribute to split data 
+	 * 1-Finding Best Attribute to split data
 	 * 2-if entropy value equal to zero mark this node as leaf
 	 * 3-repeat until all data is separated or all attributes is processed
 	 */
@@ -157,11 +157,11 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param classes
 	 * @return
 	 * Assign the Class for current value
-	 * By Get the class with maximum rows 
+	 * By Get the class with maximum rows
 	 */
 	private String findClassLabel(Map<String, Integer> classes) {
 
@@ -183,7 +183,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param csvFile
 	 * @throws IOException
 	 * Find Classes by process last column on the data
@@ -216,12 +216,12 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param csvFile
 	 * @param rows
 	 * @return
 	 * @throws IOException
-	 * 
+	 *
 	 * Find Best Attribute to split
 	 */
 	private AttributeInfo findBestSplit(File csvFile, BitSet rows)
@@ -251,13 +251,13 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param file
 	 * @param index
 	 * @param rows
 	 * @return
 	 * @throws IOException
-	 * Get Single Attribute Information 
+	 * Get Single Attribute Information
 	 */
 	private AttributeInfo singleAttributeInfo(File file, int index, BitSet rows)
 			throws IOException {
@@ -315,7 +315,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param subTree
 	 * @param count
 	 * @return
@@ -343,7 +343,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param classRecords
 	 * @param total
 	 * @return
@@ -363,7 +363,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param classRecords
 	 * @param total
 	 * @return
@@ -383,7 +383,7 @@ public class DecisionTree {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param classRecords
 	 * @param total
 	 * @return

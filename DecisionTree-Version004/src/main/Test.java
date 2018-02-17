@@ -1,11 +1,11 @@
 package main;
 
-import tree.DecisionTree;
+import tree.TreeBuilder;
 
 public class Test {
 	public static void main(String[] args) {
 		//System.out.println("Hello world");
-		DecisionTree decisionTree = new DecisionTree("data.txt");
+		TreeBuilder decisionTree = new TreeBuilder("data.txt");
 		decisionTree.inputData();
 		decisionTree.process();
 		//String s = "\"yes\"";
