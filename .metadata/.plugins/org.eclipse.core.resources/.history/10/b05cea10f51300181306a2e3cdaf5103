@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +25,7 @@ public class DecisionTree {
 	private ArrayList<Integer> allTestedNo;
 	private ArrayList<Data> trainingData;
 	private ArrayList<Data> testingData;
-	private File tempFile;
-	private FileWriter fileWriter;
-	private PrintWriter printWriter;
-	//private Node root;
+	private Node root;
 
 	public DecisionTree(String filePath) {
 		dataFile = new File(filePath);
@@ -87,35 +82,11 @@ public class DecisionTree {
 
 		//System.out.println(root.index);
 
-		writeDataIntoTempFile();
+
 
 
 	}
 
-
-	private void writeDataIntoTempFile() {
-		tempFile  = new File("dataTemp.txt");
-		try {
-			fileWriter = new FileWriter(tempFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		printWriter = new PrintWriter(fileWriter);
-
-
-		// write
-		for(int i = 0; i < attributeName.getColumnSize() - 1; i++)
-			printWriter.print(attributeName.getValueInIndex(i)+"|");
-		//
-		printWriter.close();
-		try {
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/*
 	private void builtTree(int row, int columnSize, ArrayList<Data> trainingData, Node currentNode, Data attributeName) {

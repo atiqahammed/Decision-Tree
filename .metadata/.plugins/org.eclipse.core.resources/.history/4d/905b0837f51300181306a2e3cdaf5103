@@ -103,18 +103,6 @@ public class DecisionTree {
 		}
 		printWriter = new PrintWriter(fileWriter);
 
-
-		// write
-		for(int i = 0; i < attributeName.getColumnSize() - 1; i++)
-			printWriter.print(attributeName.getValueInIndex(i)+"|");
-		//
-		printWriter.close();
-		try {
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/*
