@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.sound.midi.Synthesizer;
 
@@ -24,7 +25,7 @@ public class DecisionTree {
 	private ArrayList<Integer> allTestedNo;
 	private ArrayList<Data> trainingData;
 	private ArrayList<Data> testingData;
-	
+
 	public DecisionTree(String filePath) {
 		dataFile = new File(filePath);
 	}
@@ -45,7 +46,7 @@ public class DecisionTree {
 			}
 			totalYes = (yesCollection.size()/10)*9;
 			totalNo = (noCollection.size()/10)*9;
-		
+
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
 		}
@@ -69,8 +70,30 @@ public class DecisionTree {
 	}
 
 	private void crossValidation() {
+
+		/////////////
 		trainingData = new ArrayList<>();
 		testingData = new ArrayList<>();
-		
+
+		selectRandomTrainData(allTestedYes, yesCollection);
+		selectRandomTrainData(allTestedNo, noCollection);
+
+	}
+
+
+	private void selectRandomTrainData(ArrayList<Integer> allTested, ArrayList<Data> dataList) {
+		ArrayList<Integer> temp = new ArrayList<>();
+		while(temp.size() < dataList.size()/10-9){
+			int x = new Random().nextInt(dataList.size());
+			if(!allTested.contains(x)) {
+				temp.add(x);
+				allTested.add(x);
+			}
+		}
+
+		for(int i = 0; i < dataList.size(); i++) {
+			if(temp.contains(i)) testingData.add(dataList.get(i));
+			else trainingData.add(dataList.get(i));
+		}
 	}
 }
