@@ -17,7 +17,6 @@ public class DecisionTree {
 	private BufferedReader bufferedReader;
 	private ArrayList<Data> yesCollection;
 	private ArrayList<Data> noCollection;
-	private Map<String, ArrayList<Data>> listMap;
 	private Data attributeName;
 
 	public DecisionTree(String filePath) {
@@ -31,26 +30,17 @@ public class DecisionTree {
 			s = bufferedReader.readLine();
 			String data[] = s.split(";");
 			attributeName = new Data(data);
-			//for(int i = 0; i < data.length; i++)
-			//	System.out.print(data[i] + " ");
-			//System.out.println();
-
-			s = bufferedReader.readLine();
-			String dataX[] = s.split(";");
-			//for(int i = 0; i < data.length; i++)
-			//	System.out.print(dataX[i] + " ");
-			String test = "\"no\"";
-
-			if(dataX[20].equals(test)) System.out.println("yes");
-
-			/*
+			String no = "\"no\"";
+			String yes = "\"yes\"";
 			while ((s = bufferedReader.readLine()) != null) {
 				String dataX[] = s.split(";");
-				listMap.get(data[data.length - 1]).add(new Data(dataX));
-			}*/
+				if(dataX[dataX.length - 1].equals(yes)) yesCollection.add(new Data(dataX));
+				else noCollection.add(new Data(dataX));
+			}
 			//totalHam = (hamCollection.size()/10)*9;
 			//totalSpam = (spamCollection.size()/10)*9;
-			//System.out.println(yesCollection.size());
+			System.out.println(yesCollection.size());
+			System.out.println(noCollection.size());
 
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
@@ -60,10 +50,6 @@ public class DecisionTree {
 	private void initializeDataStructure() {
 		yesCollection = new ArrayList<Data>();
 		noCollection = new ArrayList<Data>();
-		listMap = new HashMap<String, ArrayList<Data>>();
-		listMap.put("\"yes\"", yesCollection);
-		listMap.put("\"no\"", noCollection);
-
 		try {
 			fileReader = new FileReader(dataFile);
 		} catch (FileNotFoundException e) {
