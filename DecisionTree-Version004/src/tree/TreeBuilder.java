@@ -14,7 +14,7 @@ import java.util.Random;
 
 import javax.sound.midi.Synthesizer;
 
-import All.DecisionTree;
+//import All.DecisionTree;
 
 public class TreeBuilder {
 	private File dataFile;
@@ -32,6 +32,10 @@ public class TreeBuilder {
 	private File tempFile;
 	private FileWriter fileWriter;
 	private PrintWriter printWriter;
+	private String[] arr = {"bkblk","bknwy","bkon8","bkona","bkspr","bkxbq","bkxcr","bkxwp","blxwp","bxqsq","cntxt","dsopp","dwipd",
+			 "hdchk","katri","mulch","qxmsq","r2ar8","reskd","reskr","rimmx","rkxwp","rxmsq","simpl","skach","skewr",
+			 "skrxp","spcop","stlmt","thrsk","wkcti","wkna8","wknck","wkovl","wkpos","wtoeg", "result"};
+	private com.machine.learning.decisiontrees.DecisionTree decisionTree;
 	//private Node root;
 
 	public TreeBuilder(String filePath) {
@@ -42,13 +46,16 @@ public class TreeBuilder {
 		initializeDataStructure();
 		String s = null;
 		try {
-			s = bufferedReader.readLine();
+			/*s = bufferedReader.readLine();
 			String data[] = s.split(";");
-			attributeName = new Data(data);
-			String no = "\"no\"";
-			String yes = "\"yes\"";
+			attributeName = new Data(data);*/
+			/*String no = "\"no\"";
+			String yes = "\"yes\"";*/
+			String no = "won";
+			String yes = "nowin";
+
 			while ((s = bufferedReader.readLine()) != null) {
-				String dataX[] = s.split(";");
+				String dataX[] = s.split(",");
 				if(dataX[dataX.length - 1].equals(yes)) yesCollection.add(new Data(dataX));
 				else noCollection.add(new Data(dataX));
 			}
@@ -85,15 +92,54 @@ public class TreeBuilder {
 
 		selectRandomTrainData(allTestedYes, yesCollection);
 		selectRandomTrainData(allTestedNo, noCollection);
+		System.out.println(trainingData.size());
+		System.out.println(testingData.size());
+
 		writeDataIntoTempFile();
-		DecisionTree decisionTree = new DecisionTree();
-		decisionTree.train(new File("dataTemp.psv"));
+
+		/*com.machine.learning.decisiontrees.DecisionTree*/ decisionTree = new com.machine.learning.decisiontrees.DecisionTree();
+		decisionTree.train( new File("dataTemp.psv"));
+
+		//DecisionTree decisionTree = new DecisionTree();
+		//decisionTree.train(new File("dataTemp.psv"));
+		//System.out.println(arr.length);
 		System.out.println("tree completed");
+
+		testWithData();
 		//for(int i = 0; i < )
 
 
 	}
 
+
+	private void testWithData() {
+
+		//
+		//Data tempData = testingData.get(0);
+		//String[] arrTemp = new String[tempData.getColumnSize() - 1];
+		//for(int i = 0 ;i < tempData.getColumnSize()- 1; i++)
+		//	arrTemp[i] = tempData.getValueInIndex(i);
+
+		//for(int i = 0 ;i < tempData.getColumnSize()- 1; i++)
+		//	System.out.print(arrTemp[i] + " ");
+		//System.out.println(arrTemp.length);
+
+
+		for(int i = 0; i < testingData.size(); i++)
+		{
+			String arrTemp[] = convertArray(testingData.get(i));
+			System.out.println(decisionTree.classify(arrTemp) + ", real ans > " + testingData.get(i).getValueInIndex(testingData.get(i).getColumnSize()-1));
+		}
+
+	}
+
+	private String[] convertArray(Data tempData) {
+		String[] arrTemp = new String[tempData.getColumnSize() - 1];
+		for(int i = 0 ;i < tempData.getColumnSize()- 1; i++)
+			arrTemp[i] = tempData.getValueInIndex(i);
+		return arrTemp;
+
+	}
 
 	private void writeDataIntoTempFile() {
 		tempFile  = new File("dataTemp.psv");
@@ -105,7 +151,7 @@ public class TreeBuilder {
 		}
 		printWriter = new PrintWriter(fileWriter);
 		// write
-		writeData(attributeName);
+		writeData(new Data(arr));
 		for(int i = 0; i < trainingData.size(); i++)
 			writeData(trainingData.get(i));
 
@@ -114,12 +160,12 @@ public class TreeBuilder {
 		try {
 			fileWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private void writeData(Data myData) {
+		printWriter.print("name|");
 		for(int i = 0; i < myData.getColumnSize() - 1; i++)
 			printWriter.print(myData.getValueInIndex(i)+"|");
 		printWriter.println(myData.getValueInIndex(myData.getColumnSize()-1));
