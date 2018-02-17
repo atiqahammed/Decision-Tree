@@ -115,14 +115,14 @@ public class TreeBuilder {
 
 		/////////////
 		for(int i = 0; i < 10; i++){
-			System.out.println("validation no " + i + " is processing.");
+			System.out.println("validation no " + i + 1 + " is processing.");
 		trainingData = new ArrayList<>();
 		testingData = new ArrayList<>();
 
 		selectRandomTrainData(allTestedYes, yesCollection);
 		selectRandomTrainData(allTestedNo, noCollection);
-		//System.out.println(trainingData.size());
-		//System.out.println(testingData.size());
+		System.out.println(trainingData.size());
+		System.out.println(testingData.size());
 
 		writeDataIntoTempFile();
 

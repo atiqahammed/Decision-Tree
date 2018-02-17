@@ -21,10 +21,6 @@ public class TreeBuilder {
 	private double FP;
 	private double TN;
 	private double FN;
-	private double recall;
-	private double F1score;
-	private double accuracy;
-	private double precision;
 
 
 	private File dataFile;
@@ -77,23 +73,6 @@ public class TreeBuilder {
 		}
 	}
 
-	private void result() {
-		accuracy = (TP + TN) / (TP + TN + FP + FN);
-		precision = TP / (TP + FP);
-		recall = TP / (TP + FN);
-		F1score = (2 * precision * recall) / (precision + recall);
-		System.out.println();
-		System.err.println("Total TRUE-POSITIVE   : "+ TP);
-		System.err.println("Total TRUE-NEGATIVE   : "+ TN);
-		System.err.println("Total FALSE-POSITIVE  : "+ FP);
-		System.err.println("Total FALSE-NEGATIVE  : "+ FN);
-		System.out.println("-------------------------------------");
-		System.err.println("Accuracy              : "+ accuracy);
-		System.err.println("precision             : "+ precision);
-		System.err.println("recall                : "+ recall);
-		System.err.println("F1 score              : "+ F1score);
-	}
-
 	private void initializeDataStructure() {
 		yesCollection = new ArrayList<Data>();
 		noCollection = new ArrayList<Data>();
@@ -114,25 +93,25 @@ public class TreeBuilder {
 	private void crossValidation() {
 
 		/////////////
-		for(int i = 0; i < 10; i++){
-			System.out.println("validation no " + i + " is processing.");
 		trainingData = new ArrayList<>();
 		testingData = new ArrayList<>();
 
 		selectRandomTrainData(allTestedYes, yesCollection);
 		selectRandomTrainData(allTestedNo, noCollection);
-		//System.out.println(trainingData.size());
-		//System.out.println(testingData.size());
+		System.out.println(trainingData.size());
+		System.out.println(testingData.size());
 
 		writeDataIntoTempFile();
 
 		/*com.machine.learning.decisiontrees.DecisionTree*/ decisionTree = new com.machine.learning.decisiontrees.DecisionTree();
 		decisionTree.train( new File("dataTemp.psv"));
+
+		//DecisionTree decisionTree = new DecisionTree();
+		//decisionTree.train(new File("dataTemp.psv"));
+		//System.out.println(arr.length);
 		System.out.println("tree completed");
 
 		testWithData();
-		}
-		result();
 		//for(int i = 0; i < )
 
 
@@ -146,10 +125,6 @@ public class TreeBuilder {
 			String arrTemp[] = convertArray(testingData.get(i));
 			String previousAns = testingData.get(i).getValueInIndex(testingData.get(i).getColumnSize()-1);
 			String predectedAns = decisionTree.classify(arrTemp);
-			if(previousAns.equals("won") && predectedAns.equals("won")) TP++;
-			if(previousAns.equals("won") && predectedAns.equals("nowin")) FN++;
-			if(previousAns.equals("nowin") && predectedAns.equals("nowin")) TN++;
-			if(previousAns.equals("nowin") && predectedAns.equals("won")) FP++;
 		}
 
 	}

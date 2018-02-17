@@ -114,15 +114,13 @@ public class TreeBuilder {
 	private void crossValidation() {
 
 		/////////////
-		for(int i = 0; i < 10; i++){
-			System.out.println("validation no " + i + " is processing.");
 		trainingData = new ArrayList<>();
 		testingData = new ArrayList<>();
 
 		selectRandomTrainData(allTestedYes, yesCollection);
 		selectRandomTrainData(allTestedNo, noCollection);
-		//System.out.println(trainingData.size());
-		//System.out.println(testingData.size());
+		System.out.println(trainingData.size());
+		System.out.println(testingData.size());
 
 		writeDataIntoTempFile();
 
@@ -131,8 +129,6 @@ public class TreeBuilder {
 		System.out.println("tree completed");
 
 		testWithData();
-		}
-		result();
 		//for(int i = 0; i < )
 
 
