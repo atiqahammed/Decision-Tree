@@ -9,4 +9,8 @@ public class Node {
 	public String value;
 	public ArrayList<String> condition;
 	public ArrayList<Node> child;
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }

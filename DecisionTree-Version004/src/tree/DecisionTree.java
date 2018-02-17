@@ -25,6 +25,7 @@ public class DecisionTree {
 	private ArrayList<Integer> allTestedNo;
 	private ArrayList<Data> trainingData;
 	private ArrayList<Data> testingData;
+	private Node root;
 
 	public DecisionTree(String filePath) {
 		dataFile = new File(filePath);
@@ -77,9 +78,18 @@ public class DecisionTree {
 
 		selectRandomTrainData(allTestedYes, yesCollection);
 		selectRandomTrainData(allTestedNo, noCollection);
+		builtTree(trainingData.size(), trainingData.get(0).getColumnSize(), trainingData, root, attributeName);
 
+		//System.out.println(root.index);
 	}
 
+
+	private void builtTree(int row, int columnSize, ArrayList<Data> trainingData, Node currentNode, Data attributeName) {
+		currentNode = new Node();
+		currentNode.setIndex(6);
+		System.out.println(currentNode.index);
+
+	}
 
 	private void selectRandomTrainData(ArrayList<Integer> allTested, ArrayList<Data> dataList) {
 		ArrayList<Integer> temp = new ArrayList<>();
