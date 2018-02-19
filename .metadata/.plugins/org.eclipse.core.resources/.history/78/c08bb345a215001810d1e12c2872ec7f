@@ -182,9 +182,8 @@ public class TreeBuilder {
 		
 		for(int i = 0; i < my_row; i++)
 			class_values.add(data_set.get(i).getValueInIndex(my_colomn - 1));
-		double previous_information = calculateInformation(my_row, class_values);
-		System.out.println(previous_information);
-		 
+		 double previousInformation = calculateInformation(my_row, class_values);
+		
 		
 		//System.out.println(class_values.size());
 		/*for(int i = 0; i < my_row; i++)
@@ -215,44 +214,6 @@ public class TreeBuilder {
 				FP++;
 		}
 	}*/
-
-	private double calculateInformation(int number_of_values, ArrayList<String> values) {
-		ArrayList<String> unique_values = new ArrayList<>();
-		Map<String, Integer> count_of_unique_value = new HashMap<String, Integer>();
-		//System.out.println(number_of_values);
-		for(int i = 0; i < number_of_values; i++)
-		{
-			String this_string = values.get(i);
-			if(!unique_values.contains(this_string)){
-				count_of_unique_value.put(this_string, 1);
-				unique_values.add(this_string);
-			}
-			else count_of_unique_value.put(this_string, count_of_unique_value.get(this_string)+1); 
-		}
-		
-		double entropy = 0.0;
-		if(values.size() == 1) return entropy;
-		for(int i = 0; i < unique_values.size(); i++)
-		{
-		    	double probability = (double) count_of_unique_value.get(unique_values.get(i)) / number_of_values;
-		    	entropy += probability * log(probability, 2);
-		 }
-		 entropy *= -1;
-		 return entropy;		
-		/*for(int i = 0; i < unique_values.size(); i++)
-			System.out.println(unique_values.get(i) +" "+ count_of_unique_value.get(unique_values.get(i)));
-		*/
-		//System.out.println(unique_values.size());
-		//System.out.println("testing");
-		//return 0;
-	}
-
-	
-	private double log(double x, int base)
-	{
-	    return  (Math.log(x) / Math.log(base));
-	}
-
 
 	private String[] convertArray(Data tempData) {
 		String[] arrTemp = new String[tempData.getColumnSize() - 1];

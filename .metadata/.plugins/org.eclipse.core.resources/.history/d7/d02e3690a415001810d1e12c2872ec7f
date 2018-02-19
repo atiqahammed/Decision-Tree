@@ -220,6 +220,7 @@ public class TreeBuilder {
 		ArrayList<String> unique_values = new ArrayList<>();
 		Map<String, Integer> count_of_unique_value = new HashMap<String, Integer>();
 		//System.out.println(number_of_values);
+		
 		for(int i = 0; i < number_of_values; i++)
 		{
 			String this_string = values.get(i);
@@ -231,19 +232,24 @@ public class TreeBuilder {
 		}
 		
 		double entropy = 0.0;
-		if(values.size() == 1) return entropy;
+		if(values.size() == 1) return 0;
 		for(int i = 0; i < unique_values.size(); i++)
 		{
 		    	double probability = (double) count_of_unique_value.get(unique_values.get(i)) / number_of_values;
 		    	entropy += probability * log(probability, 2);
 		 }
 		 entropy *= -1;
-		 return entropy;		
+		 return entropy;
+		
+		
 		/*for(int i = 0; i < unique_values.size(); i++)
 			System.out.println(unique_values.get(i) +" "+ count_of_unique_value.get(unique_values.get(i)));
 		*/
 		//System.out.println(unique_values.size());
 		//System.out.println("testing");
+		
+		
+		
 		//return 0;
 	}
 
