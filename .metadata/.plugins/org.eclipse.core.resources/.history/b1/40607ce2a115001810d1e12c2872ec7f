@@ -181,12 +181,10 @@ public class TreeBuilder {
 		ArrayList<String> class_values = new ArrayList<>();
 		
 		for(int i = 0; i < my_row; i++)
-			class_values.add(data_set.get(i).getValueInIndex(my_colomn - 1));
+			class_values.add(data_set.get(i).getValueInIndex(data_set.get(i).getColumnSize() - 1));
 		
 		//System.out.println(class_values.size());
-		/*for(int i = 0; i < my_row; i++)
-			System.out.println(class_values.get(i));
-		*/
+		
 		
 		
 		
