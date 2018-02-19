@@ -39,9 +39,6 @@ public class TreeBuilder {
 	private FileWriter fileWriter;
 	private PrintWriter printWriter;
 	
-	public TreeBuilder(String path) {
-		dataFile = new File(path);
-	}
 	
 	
 
@@ -49,36 +46,18 @@ public class TreeBuilder {
 		initializeDataStructure();
 		String s = null;
 		try {
-			
-			s= bufferedReader.readLine();
-			String data[] = s.split(" ");
-			//System.out.println(data);
-			attributeName = new Data(data);
-			
-			String no = "no";
-			String yes = "yes";
+			String no = "won";
+			String yes = "nowin";
 			
 			while ((s = bufferedReader.readLine()) != null) {
-				String dataX[] = s.split(" ");
+				String dataX[] = s.split(",");
 				if (dataX[dataX.length - 1].equals(yes))
 					yesCollection.add(new Data(dataX));
 				else
 					noCollection.add(new Data(dataX));
 			}
-			//System.out.println(yesCollection.size());
-			//System.out.println(noCollection.size());
-			
-			//totalYes = (yesCollection.size() / 10) * 9;
-			//totalNo = (noCollection.size() / 10) * 9;
-			/*
-			for(int i = 0; i < yesCollection.size(); i++)
-			{
-				for(int j = 0; j < yesCollection.get(i).getColumnSize(); j++)
-					System.out.print(yesCollection.get(i).getValueInIndex(j)+", ");
-				System.out.println();
-			}*/
-			
-			
+			totalYes = (yesCollection.size() / 10) * 9;
+			totalNo = (noCollection.size() / 10) * 9;
 
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
@@ -120,31 +99,13 @@ public class TreeBuilder {
 	}
 
 	private void crossValidation() {
-		//for (int i = 0; i < 10; i++) {
-			//System.out.println("validation no " + i + " is processing.");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("validation no " + i + " is processing.");
 			trainingData = new ArrayList<>();
 			testingData = new ArrayList<>();
-			
-			//for(int index = 0; index < yesCollection.size(); index++)
-			//	trainingData.add(yesCollection.get(index));
-			trainingData.addAll(yesCollection);
-			trainingData.addAll(noCollection);
-			
-			
-			//System.out.println(trainingData.size());
-			
-			
-			/*
-			for(int index = 0; index < noCollection.size(); index++) {
-				trainingData.add(noCollection.get(index));
-			}*/
-			
-			System.out.println(trainingData.size());
-			
-			
-			
-			//selectRandomTrainData(allTestedYes, yesCollection);
-			//selectRandomTrainData(allTestedNo, noCollection);
+
+			selectRandomTrainData(allTestedYes, yesCollection);
+			selectRandomTrainData(allTestedNo, noCollection);
 
 			
 			/*
@@ -156,7 +117,7 @@ public class TreeBuilder {
 			testWithData();
 			
 			*/
-		//}
+		}
 		//result();
 	}
 	
@@ -207,17 +168,13 @@ public class TreeBuilder {
 		}
 	}*/
 
-	/*
 	private void writeData(Data myData) {
 		printWriter.print("name|");
 		for (int i = 0; i < myData.getColumnSize() - 1; i++)
 			printWriter.print(myData.getValueInIndex(i) + "|");
 		printWriter.println(myData.getValueInIndex(myData.getColumnSize() - 1));
 
-	}*/
-	
-	
-	/*
+	}
 
 	private void selectRandomTrainData(ArrayList<Integer> allTested, ArrayList<Data> dataList) {
 		ArrayList<Integer> temp = new ArrayList<>();
@@ -235,5 +192,5 @@ public class TreeBuilder {
 			else
 				trainingData.add(dataList.get(i));
 		}
-	}*/
+	}
 }

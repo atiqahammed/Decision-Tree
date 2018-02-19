@@ -52,7 +52,7 @@ public class TreeBuilder {
 			
 			s= bufferedReader.readLine();
 			String data[] = s.split(" ");
-			//System.out.println(data);
+			System.out.println(data);
 			attributeName = new Data(data);
 			
 			String no = "no";
@@ -70,15 +70,6 @@ public class TreeBuilder {
 			
 			//totalYes = (yesCollection.size() / 10) * 9;
 			//totalNo = (noCollection.size() / 10) * 9;
-			/*
-			for(int i = 0; i < yesCollection.size(); i++)
-			{
-				for(int j = 0; j < yesCollection.get(i).getColumnSize(); j++)
-					System.out.print(yesCollection.get(i).getValueInIndex(j)+", ");
-				System.out.println();
-			}*/
-			
-			
 
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
@@ -125,21 +116,18 @@ public class TreeBuilder {
 			trainingData = new ArrayList<>();
 			testingData = new ArrayList<>();
 			
-			//for(int index = 0; index < yesCollection.size(); index++)
-			//	trainingData.add(yesCollection.get(index));
-			trainingData.addAll(yesCollection);
-			trainingData.addAll(noCollection);
+			for(int index = 0; index < yesCollection.size(); index++)
+				trainingData.add(yesCollection.get(index));
 			
 			
-			//System.out.println(trainingData.size());
-			
-			
-			/*
-			for(int index = 0; index < noCollection.size(); index++) {
-				trainingData.add(noCollection.get(index));
-			}*/
 			
 			System.out.println(trainingData.size());
+			
+			
+			
+			for(int index = 0; index < noCollection.size(); index++) {
+				trainingData.add(noCollection.get(index));
+			}
 			
 			
 			

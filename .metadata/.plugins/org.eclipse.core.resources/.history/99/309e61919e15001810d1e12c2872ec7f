@@ -125,21 +125,20 @@ public class TreeBuilder {
 			trainingData = new ArrayList<>();
 			testingData = new ArrayList<>();
 			
-			//for(int index = 0; index < yesCollection.size(); index++)
-			//	trainingData.add(yesCollection.get(index));
-			trainingData.addAll(yesCollection);
-			trainingData.addAll(noCollection);
+			for(int index = 0; index < yesCollection.size(); index++)
+				trainingData.add(yesCollection.get(index));
 			
 			
-			//System.out.println(trainingData.size());
-			
-			
-			/*
-			for(int index = 0; index < noCollection.size(); index++) {
-				trainingData.add(noCollection.get(index));
-			}*/
 			
 			System.out.println(trainingData.size());
+			
+			
+			
+			for(int index = 0; index < noCollection.size(); index++) {
+				trainingData.add(noCollection.get(index));
+			}
+			
+			//System.out.println(trainingData.size());
 			
 			
 			

@@ -6,9 +6,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		TreeBuilder builder = new TreeBuilder("wather.txt");
+		TreeBuilder builder = new TreeBuilder();
 		builder.inputData();
-		builder.process();
+		//builder.process();
 
 	}
 

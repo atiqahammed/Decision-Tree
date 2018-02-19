@@ -8,7 +8,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		TreeBuilder builder = new TreeBuilder("wather.txt");
 		builder.inputData();
-		builder.process();
+		//builder.process();
 
 	}
 
