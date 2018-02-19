@@ -137,11 +137,7 @@ public class TreeBuilder {
 			trainingData.addAll(yesCollection);
 			trainingData.addAll(noCollection);
 			
-			//for(int i = 0; i < attributeName.getColumnSize(); i++)
-			//	System.err.println(index_maping.get(attributeName.getValueInIndex(i)));
-			
-			
-			//root =  builtTree();
+			root =  builtTree();
 			
 			
 			

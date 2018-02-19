@@ -39,11 +39,6 @@ public class TreeBuilder {
 	private FileWriter fileWriter;
 	private PrintWriter printWriter;
 	
-	
-	private Node root;
-	private Map<String, Integer> index_maping;
-	
-	
 	public TreeBuilder(String path) {
 		dataFile = new File(path);
 	}
@@ -57,10 +52,8 @@ public class TreeBuilder {
 			
 			s= bufferedReader.readLine();
 			String data[] = s.split(" ");
+			//System.out.println(data);
 			attributeName = new Data(data);
-			index_maping = new HashMap<>();
-			for(int i = 0; i < data.length; i++)
-				index_maping.put(data[i], i);
 			
 			String no = "no";
 			String yes = "yes";
@@ -136,13 +129,6 @@ public class TreeBuilder {
 			//	trainingData.add(yesCollection.get(index));
 			trainingData.addAll(yesCollection);
 			trainingData.addAll(noCollection);
-			
-			//for(int i = 0; i < attributeName.getColumnSize(); i++)
-			//	System.err.println(index_maping.get(attributeName.getValueInIndex(i)));
-			
-			
-			//root =  builtTree();
-			
 			
 			
 			//System.out.println(trainingData.size());

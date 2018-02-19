@@ -1,0 +1,12 @@
+package tree;
+
+import java.util.ArrayList;
+
+public class Node {
+	public String Name_Of_Attribute;
+	public String Value;
+	public boolean Is_Leaf;
+	public ArrayList<Node> Collection_Of_Child;
+	public ArrayList<String> Collection_Of_Condition;
+	public int index_of_attribute;
+}
