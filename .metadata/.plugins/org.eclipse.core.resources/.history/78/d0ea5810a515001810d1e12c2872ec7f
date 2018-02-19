@@ -242,7 +242,8 @@ public class TreeBuilder {
 	}
 
 	
-	private double log(double x, int base) {
+	private double log(double x, int base)
+	{
 	    return  (Math.log(x) / Math.log(base));
 	}
 
