@@ -94,7 +94,7 @@ void builtTree(int row, int col, string **a, node &currentNode, string *header)
     	currentNode.name = header[index];
     	currentNode.index = indexMaping[currentNode.name];
     	currentNode.condition = valuesOfThisNode;
-    	node tempNode;
+    //	node tempNode;
     	cout << "attribute name " << currentNode.name << endl;
     	
     	for(int i = 0; i < currentNode.condition.size(); i++)     //currentNode.condition.size()
@@ -209,35 +209,4 @@ int main(void)
 
 	return 0;
 }
-//if(currentNode.isLeaf)
-	//	cout << "jhamela" << endl;
-	//cout << currentNode.isLeaf << endl;
-	//if(currentNode.isLeaf) return currentNode.value;
 
-
-
-    //cout << "hello world" << endl;
-    //initializeNode(root);
-    //cout << root.isLeaf << endl;
-
-
-  	//cout << root.index << endl;
-
-  //	cout << root.child.size() << endl;
-  
-  
-  
-
-    		///cout << currentNode.condition[i] << rowCount[currentNode.condition[i]] << endl;
-    		//*arrTemp = new 
-
-
-	    				//cout  << a[j][k] << " " << jj<<","<< kk<<" ";
-
-    	//cout << valuesOfThisNode.size() << endl;
-
-
-  // cout << smallestInformation << endl;
-
-
-    //cout << a[currentNode.index] << endl;
