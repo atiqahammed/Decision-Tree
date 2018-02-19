@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;tree&apos; to &apos;DecisionTree-Version005/src&apos;&#x0D;&#x0A;- Original project: &apos;DecisionTree-Version004&apos;&#x0D;&#x0A;- Destination element: &apos;DecisionTree-Version005/src&apos;&#x0D;&#x0A;- Original element: &apos;DecisionTree-Version004/src/tree&apos;" description="Copy package" destination="=DecisionTree-Version005/src" element1="/src&lt;tree" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1519060870365" version="1.0"/>
+</session>
