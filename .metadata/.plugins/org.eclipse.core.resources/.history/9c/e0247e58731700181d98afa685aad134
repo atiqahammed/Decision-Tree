@@ -209,10 +209,7 @@ public class TreeBuilder {
 					if(values.get(j).equals(data_set.get(k).getValueInIndex(i)))
 						temp_class_value.add(data_set.get(k).getValueInIndex(my_colomn - 1));
 				//System.out.println(temp_class_value.size());
-				post_information += (double) temp_class_value.size()/my_row * calculateInformation(temp_class_value.size(), temp_class_value);
 			}
-
-			System.out.println(post_information);
 
 
 			//System.out.println(values.size());
