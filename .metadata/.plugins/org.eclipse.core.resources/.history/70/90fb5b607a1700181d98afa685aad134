@@ -236,11 +236,10 @@ public class TreeBuilder {
 				index_count++;
 			}
 
-			/*
 			System.out.println(temp_header.length);
 			for(int i = 0; i < temp_header.length; i++)
 				System.out.println(temp_header[i]);
-			*/
+
 			//System.out.println("selec " + selected_index);
 		}
 
