@@ -229,11 +229,6 @@ public class TreeBuilder {
 			Node temp_node = new Node();
 			temp_node.index_of_attribute = index_maping.get(header.getValueInIndex(selected_index));
 			temp_node.name_of_attribute = header.getValueInIndex(selected_index);
-			temp_node.collection_of_condition = value_of_this_node;
-
-			for(int i = 0; i < temp_node.collection_of_condition.size(); i++)
-				System.out.println(temp_node.collection_of_condition.get(i));
-
 			//System.out.println(temp_node.name_of_attribute);
 			//System.out.println(temp_node.index_of_attribute);
 			String[] temp_header= new String[my_colomn - 1];

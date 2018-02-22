@@ -213,7 +213,7 @@ public class TreeBuilder {
 				row_count_temp.put(values.get(j), temp_class_value.size());
 			}
 
-			//System.out.println(post_information);
+			System.out.println(post_information);
 
 			if(post_information < smallest_information) {
 				selected_index = i;
@@ -226,16 +226,7 @@ public class TreeBuilder {
 
 		if (selected_index != -1) {
 
-			Node temp_node = new Node();
-			temp_node.index_of_attribute = index_maping.get(header.getValueInIndex(selected_index));
-			temp_node.name_of_attribute = header.getValueInIndex(selected_index);
-			temp_node.collection_of_condition = value_of_this_node;
-
-			for(int i = 0; i < temp_node.collection_of_condition.size(); i++)
-				System.out.println(temp_node.collection_of_condition.get(i));
-
-			//System.out.println(temp_node.name_of_attribute);
-			//System.out.println(temp_node.index_of_attribute);
+			Node temp_node;
 			String[] temp_header= new String[my_colomn - 1];
 			int index_count = 0;
 			for(int i = 0; i < header.getColumnSize(); i++)
@@ -245,34 +236,12 @@ public class TreeBuilder {
 				index_count++;
 			}
 
-			Data header_of_nested_tree = new Data(temp_header);
-			ArrayList<Data> nested_data;// = new ArrayList<>();
-
-
-			//for(int ll = 0; ll < )
-
-			for(int i = 0; i < my_row; i++)
-			{
-				String[] temp_arr = new String[my_colomn-1];
-				int col_count = 0;
-				for(int j = 0; j < my_colomn; j++)
-				{
-					if(col_count == selected_index) continue;
-					temp_arr[col_count] = data_set.get(i).getValueInIndex(j);
-					col_count++;
-				}
-
-				//nested_data.add(new Data(temp_arr));
-			}
-
-			//System.out.println(nested_data.size());
-			/*for(int i = 0; i < nested_data.size(); i++)
-			{
-				for(int j =0; j < )
-			}*/
-
-
-
+			/*
+			System.out.println(temp_header.length);
+			for(int i = 0; i < temp_header.length; i++)
+				System.out.println(temp_header[i]);
+			*/
+			//System.out.println("selec " + selected_index);
 		}
 
 
