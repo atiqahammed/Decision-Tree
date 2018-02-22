@@ -193,7 +193,7 @@ public class TreeBuilder {
 		int selected_index = -1;
 
 
-		for(int i = 0; i < my_colomn - 1; i++) {  //col - 1
+		for(int i = 0; i < 1; i++) {  //col - 1
 			double post_information = 0.0;
 			Map<String, Integer> row_count_temp = new HashMap<String, Integer>();
 			ArrayList<String> values = new ArrayList<String>();
@@ -210,25 +210,17 @@ public class TreeBuilder {
 						temp_class_value.add(data_set.get(k).getValueInIndex(my_colomn - 1));
 				//System.out.println(temp_class_value.size());
 				post_information += (double) temp_class_value.size()/my_row * calculateInformation(temp_class_value.size(), temp_class_value);
-				row_count_temp.put(values.get(j), temp_class_value.size());
 			}
 
 			System.out.println(post_information);
 
-			if(post_information < smallest_information) {
-				selected_index = i;
-				smallest_information = post_information;
-				value_of_this_node = values;
-				row_count = row_count_temp;
-			}
+
+			//System.out.println(values.size());
+			//for(int i = 0;)
+
+
+
 		}
-
-
-		if (selected_index != -1) {
-
-			System.out.println("selec " + selected_index);
-		}
-
 
 
 		//System.out.println(previous_information);
