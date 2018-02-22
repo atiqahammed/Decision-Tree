@@ -38,34 +38,37 @@ public class TreeBuilder {
 	private File tempFile;
 	private FileWriter fileWriter;
 	private PrintWriter printWriter;
-	
-	
+
+
 	private Node root;
 	private Map<String, Integer> index_maping;
-	
-	
+
+
 	public TreeBuilder(String path) {
 		dataFile = new File(path);
 	}
-	
-	
+
+
 
 	public void inputData() {
 		initializeDataStructure();
 		String s = null;
 		try {
-			
+
 			s= bufferedReader.readLine();
 			String data[] = s.split(" ");
 			attributeName = new Data(data);
 			index_maping = new HashMap<>();
+
 			for(int i = 0; i < data.length; i++)
 				index_maping.put(data[i], i);
-			
+
 			String no = "no";
 			String yes = "yes";
-			
+
+
 			while ((s = bufferedReader.readLine()) != null) {
+
 				String dataX[] = s.split(" ");
 				if (dataX[dataX.length - 1].equals(yes))
 					yesCollection.add(new Data(dataX));
@@ -74,7 +77,7 @@ public class TreeBuilder {
 			}
 			//System.out.println(yesCollection.size());
 			//System.out.println(noCollection.size());
-			
+
 			//totalYes = (yesCollection.size() / 10) * 9;
 			//totalNo = (noCollection.size() / 10) * 9;
 			/*
@@ -84,8 +87,8 @@ public class TreeBuilder {
 					System.out.print(yesCollection.get(i).getValueInIndex(j)+", ");
 				System.out.println();
 			}*/
-			
-			
+
+
 
 		} catch (IOException e) {
 			System.out.println("got error in reading data using bufferReader");
@@ -131,36 +134,36 @@ public class TreeBuilder {
 			//System.out.println("validation no " + i + " is processing.");
 			trainingData = new ArrayList<>();
 			testingData = new ArrayList<>();
-			
+
 			//for(int index = 0; index < yesCollection.size(); index++)
 			//	trainingData.add(yesCollection.get(index));
 			trainingData.addAll(yesCollection);
 			trainingData.addAll(noCollection);
-			
+
 			//for(int i = 0; i < attributeName.getColumnSize(); i++)
 			//	System.err.println(index_maping.get(attributeName.getValueInIndex(i)));
-			
-			
+
+
 			root =  builtTree(trainingData, attributeName);
-			
-			
-			
+
+
+
 			//System.out.println(trainingData.size());
-			
-			
+
+
 			/*
 			for(int index = 0; index < noCollection.size(); index++) {
 				trainingData.add(noCollection.get(index));
 			}*/
-			
+
 			//System.out.println(trainingData.size());
-			
-			
-			
+
+
+
 			//selectRandomTrainData(allTestedYes, yesCollection);
 			//selectRandomTrainData(allTestedNo, noCollection);
 
-			
+
 			/*
 			writeDataIntoTempFile();
 
@@ -168,31 +171,55 @@ public class TreeBuilder {
 			decisionTree.train(new File("dataTemp.psv"));
 			System.out.println("tree completed");
 			testWithData();
-			
+
 			*/
 		//}
 		//result();
 	}
-	
+
 	private Node builtTree(ArrayList<Data> data_set, Data header) {
 		int my_row = data_set.size();
 		int my_colomn = data_set.get(0).getColumnSize();
-		
+
 		ArrayList<String> class_values = new ArrayList<>();
-		
+
 		for(int i = 0; i < my_row; i++)
 			class_values.add(data_set.get(i).getValueInIndex(my_colomn - 1));
 		double previous_information = calculateInformation(my_row, class_values);
-		System.out.println(previous_information);
-		 
-		
+		double smallest_information = previous_information;
+
+		ArrayList<String> value_of_this_node = new ArrayList<>();
+		Map<String, Integer> row_count = new HashMap<>();
+		int selected_index = -1;
+
+
+		for(int i = 0; i < 1; i++) {  //col - 1
+			double post_information = 0.0;
+			Map<String, Integer> row_count_temp = new HashMap<String, Integer>();
+			ArrayList<String> values = new ArrayList<String>();
+			for(int j = 0; j < my_row; j++)
+				if(!values.contains(data_set.get(j).getValueInIndex(i)))
+					values.add(data_set.get(j).getValueInIndex(i));
+
+
+			System.out.println(values.size());
+			//for(int i = 0;)
+
+
+
+		}
+
+
+		//System.out.println(previous_information);
+
+
 		//System.out.println(class_values.size());
 		/*for(int i = 0; i < my_row; i++)
 			System.out.println(class_values.get(i));
 		*/
-		
-		
-		
+
+
+
 		return null;
 	}
 
@@ -219,7 +246,7 @@ public class TreeBuilder {
 	private double calculateInformation(int number_of_values, ArrayList<String> values) {
 		ArrayList<String> unique_values = new ArrayList<>();
 		Map<String, Integer> count_of_unique_value = new HashMap<String, Integer>();
-		
+
 		for(int i = 0; i < number_of_values; i++)
 		{
 			String this_string = values.get(i);
@@ -227,9 +254,9 @@ public class TreeBuilder {
 				count_of_unique_value.put(this_string, 1);
 				unique_values.add(this_string);
 			}
-			else count_of_unique_value.put(this_string, count_of_unique_value.get(this_string)+1); 
+			else count_of_unique_value.put(this_string, count_of_unique_value.get(this_string)+1);
 		}
-		
+
 		double entropy = 0.0;
 		if(values.size() == 1) return entropy;
 		for(int i = 0; i < unique_values.size(); i++)
@@ -241,7 +268,7 @@ public class TreeBuilder {
 		 return entropy;
 	}
 
-	
+
 	private double log(double x, int base) {
 	    return  (Math.log(x) / Math.log(base));
 	}
@@ -284,8 +311,8 @@ public class TreeBuilder {
 		printWriter.println(myData.getValueInIndex(myData.getColumnSize() - 1));
 
 	}*/
-	
-	
+
+
 	/*
 
 	private void selectRandomTrainData(ArrayList<Integer> allTested, ArrayList<Data> dataList) {
