@@ -172,6 +172,7 @@ public class TreeBuilder {
 				FP++;
 
 		}
+
 	}
 
 	private String predict(Data data) {
@@ -303,6 +304,19 @@ public class TreeBuilder {
 		return temp_node;
 	}
 
+	/*
+	 *
+	 * private void testWithData() { for (int i = 0; i < testingData.size();
+	 * i++) { String arrTemp[] = convertArray(testingData.get(i)); String
+	 * previousAns =
+	 * testingData.get(i).getValueInIndex(testingData.get(i).getColumnSize() -
+	 * 1); String predectedAns = decisionTree.classify(arrTemp); if
+	 * (previousAns.equals("won") && predectedAns.equals("won")) TP++; if
+	 * (previousAns.equals("won") && predectedAns.equals("nowin")) FN++; if
+	 * (previousAns.equals("nowin") && predectedAns.equals("nowin")) TN++; if
+	 * (previousAns.equals("nowin") && predectedAns.equals("won")) FP++; } }
+	 */
+
 	private double calculateInformation(int number_of_values, ArrayList<String> values) {
 		ArrayList<String> unique_values = new ArrayList<>();
 		Map<String, Integer> count_of_unique_value = new HashMap<String, Integer>();
@@ -337,4 +351,38 @@ public class TreeBuilder {
 			arrTemp[i] = tempData.getValueInIndex(i);
 		return arrTemp;
 	}
+	/*
+	 *
+	 * private void writeDataIntoTempFile() { tempFile = new
+	 * File("dataTemp.psv"); try { fileWriter = new FileWriter(tempFile); }
+	 * catch (IOException e) { e.printStackTrace(); } printWriter = new
+	 * PrintWriter(fileWriter); writeData(new Data(arr)); for (int i = 0; i <
+	 * trainingData.size(); i++) writeData(trainingData.get(i));
+	 *
+	 * System.out.println("data has been written in temp file :)");
+	 * printWriter.close(); try { fileWriter.close(); } catch (IOException e) {
+	 * e.printStackTrace(); } }
+	 */
+
+	/*
+	 * private void writeData(Data myData) { printWriter.print("name|"); for
+	 * (int i = 0; i < myData.getColumnSize() - 1; i++)
+	 * printWriter.print(myData.getValueInIndex(i) + "|");
+	 * printWriter.println(myData.getValueInIndex(myData.getColumnSize() - 1));
+	 *
+	 * }
+	 */
+
+	/*
+	 *
+	 * private void selectRandomTrainData(ArrayList<Integer> allTested,
+	 * ArrayList<Data> dataList) { ArrayList<Integer> temp = new ArrayList<>();
+	 * while (temp.size() < dataList.size() / 10 - 9) { int x = new
+	 * Random().nextInt(dataList.size()); if (!allTested.contains(x)) {
+	 * temp.add(x); allTested.add(x); } }
+	 *
+	 * for (int i = 0; i < dataList.size(); i++) { if (temp.contains(i))
+	 * testingData.add(dataList.get(i)); else trainingData.add(dataList.get(i));
+	 * } }
+	 */
 }
