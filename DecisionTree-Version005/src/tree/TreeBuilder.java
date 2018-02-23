@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -63,8 +65,8 @@ public class TreeBuilder {
 			for(int i = 0; i < data.length; i++)
 				index_maping.put(data[i], i);
 
-			String no = "no";
-			String yes = "yes";
+			String no = "nowin";
+			String yes = "win";
 
 
 			while ((s = bufferedReader.readLine()) != null) {
@@ -147,6 +149,10 @@ public class TreeBuilder {
 			root =  builtTree(trainingData, attributeName);
 
 
+			testingData.add(trainingData.get(4));
+			testingData.add(trainingData.get(8));
+
+			test();
 
 			//System.out.println(trainingData.size());
 
@@ -163,19 +169,52 @@ public class TreeBuilder {
 			//selectRandomTrainData(allTestedYes, yesCollection);
 			//selectRandomTrainData(allTestedNo, noCollection);
 
-
-			/*
-			writeDataIntoTempFile();
-
-			decisionTree = new com.machine.learning.decisiontrees.DecisionTree();
-			decisionTree.train(new File("dataTemp.psv"));
-			System.out.println("tree completed");
-			testWithData();
-
-			*/
-		//}
 		//result();
 	}
+
+	private void test() {
+		int col = testingData.get(0).getColumnSize();
+		for(int i = 0; i < testingData.size(); i++)
+		{
+			System.out.println("original " + testingData.get(i).getValueInIndex(col - 1));
+			predict(testingData.get(i));
+
+
+		}
+
+	}
+
+
+
+	private void predict(Data data) {
+		//System.out.println(root.index_of_attribute);
+		//System.out.println(root.name_of_attribute);
+		//System.out.println(root.collection_of_child.get(2).name_of_attribute);
+		String s = traverse(root, data);
+		System.out.println("result " + s);
+
+	}
+
+
+
+	private String traverse(Node current_node, Data data) {
+		//System.out.println(data.);
+		if(current_node.is_leaf) return current_node.value;
+
+		int index = -1;
+		for(int i =0; i < current_node.collection_of_condition.size(); i++)
+		{
+			if(current_node.collection_of_condition.get(i).equals(data.getValueInIndex(current_node.index_of_attribute)))
+				index = i;
+		}
+
+		if(index != -1)
+			return traverse(current_node.collection_of_child.get(index), data);
+
+		return null;
+	}
+
+
 
 	private Node builtTree(ArrayList<Data> data_set, Data header) {
 		int my_row = data_set.size();
@@ -230,53 +269,89 @@ public class TreeBuilder {
 			temp_node.index_of_attribute = index_maping.get(header.getValueInIndex(selected_index));
 			temp_node.name_of_attribute = header.getValueInIndex(selected_index);
 			temp_node.collection_of_condition = value_of_this_node;
+			temp_node.collection_of_child = new ArrayList<>();
 
-			for(int i = 0; i < temp_node.collection_of_condition.size(); i++)
-				System.out.println(temp_node.collection_of_condition.get(i));
+			//System.out.println("attribute name " + temp_node.name_of_attribute);
 
-			//System.out.println(temp_node.name_of_attribute);
-			//System.out.println(temp_node.index_of_attribute);
-			String[] temp_header= new String[my_colomn - 1];
-			int index_count = 0;
-			for(int i = 0; i < header.getColumnSize(); i++)
+			for(int kk = 0; kk < temp_node.collection_of_condition.size(); kk++)
 			{
-				if(i == selected_index) continue;
-				temp_header[index_count] = header.getValueInIndex(i);
-				index_count++;
-			}
+				Node inside_node;
+				String[] temp_header= new String[my_colomn - 1];
+				int index_count = 0;
 
-			Data header_of_nested_tree = new Data(temp_header);
-			ArrayList<Data> nested_data;// = new ArrayList<>();
-
-
-			//for(int ll = 0; ll < )
-
-			for(int i = 0; i < my_row; i++)
-			{
-				String[] temp_arr = new String[my_colomn-1];
-				int col_count = 0;
-				for(int j = 0; j < my_colomn; j++)
+				for(int i = 0; i < header.getColumnSize(); i++)
 				{
-					if(col_count == selected_index) continue;
-					temp_arr[col_count] = data_set.get(i).getValueInIndex(j);
-					col_count++;
+					if(i == selected_index) continue;
+					temp_header[index_count] = header.getValueInIndex(i);
+					index_count++;
+				}
+				Data header_of_nested_tree = new Data(temp_header);
+				ArrayList<Data> nested_data = new ArrayList<>();
+
+				for(int j = 0; j < my_row; j++)
+				{
+					String[] temp_data_array = new String[my_colomn - 1];
+					int p_count = 0;
+					if(temp_node.collection_of_condition.get(kk).equals(data_set.get(j).getValueInIndex(selected_index))) {
+						for(int p = 0; p < my_colomn; p++)
+						{
+
+							//System.out.print(data_set.get(j).getValueInIndex(p) + " ");
+							if(p == selected_index) continue;
+							temp_data_array[p_count] = data_set.get(j).getValueInIndex(p);
+							p_count++;
+						}
+						nested_data.add(new Data(temp_data_array));
+						//System.out.println("paichi " + temp_node.collection_of_condition.get(kk));
+					}
 				}
 
-				//nested_data.add(new Data(temp_arr));
+
+				//System.out.println("condition name " + temp_node.collection_of_condition.get(kk)+" " + nested_data.size());
+
+				/*for(int x = 0; x < header_of_nested_tree.getColumnSize(); x++)
+					System.out.print(header_of_nested_tree.getValueInIndex(x)+ " ");
+				System.out.println();
+				/*for(int x = 0; x < nested_data.size(); x++)
+				{
+					for(int y = 0; y < nested_data.get(x).getColumnSize(); y++)
+						System.out.print(nested_data.get(x).getValueInIndex(y) + " ");
+					System.out.println();
+				}*/
+
+				//System.out.println();
+				//System.out.println(nested_data.get(0).getColumnSize() + " " + header_of_nested_tree.getColumnSize());
+				temp_node.collection_of_child.add(builtTree(nested_data, header_of_nested_tree));
 			}
 
-			//System.out.println(nested_data.size());
-			/*for(int i = 0; i < nested_data.size(); i++)
-			{
-				for(int j =0; j < )
-			}*/
-
-
-
+			return temp_node;
 		}
 
+		Node temp_node = new Node();
+		temp_node.is_leaf = true;
+		//System.out.println("-------------------------------------");
 
+		ArrayList<String> v = new ArrayList<>();
+		Map<String, Integer> count_leaf = new HashMap<>();
 
+		for(int i = 0; i < my_row; i++)
+		{
+			String s =  data_set.get(i).getValueInIndex(my_colomn- 1);
+			if(!v.contains(s)) {
+				v.add(s);
+				count_leaf.put(s, 0);
+			}else count_leaf.put(s, count_leaf.get(s)+1);
+		}
+
+		int index = 0;
+		for(int i = 1 ; i < v.size(); i++)
+			if(count_leaf.get(v.get(i)) > count_leaf.get(v.get(index)))
+				index = i;
+		temp_node.value = v.get(index);
+
+		//System.out.println(temp_node.value);
+
+		//System.out.println("-------------------------------------");
 		//System.out.println(previous_information);
 
 
@@ -287,7 +362,7 @@ public class TreeBuilder {
 
 
 
-		return null;
+		return temp_node;
 	}
 
 
